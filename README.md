@@ -24,7 +24,7 @@ npm install --save @carpenter/miniprogram-qiniuupload
 3. WXML 文件中引用 miniprogram-qiniuupload
 
 ``` xml
-  目前暂不支持自定义样式
+  <!-- 目前暂不支持自定义样式 -->
   <upload
     info="{{ uploadInfo }}"
     isUpload="{{ true }}"
@@ -40,7 +40,7 @@ npm install --save @carpenter/miniprogram-qiniuupload
 |--------------|--------------|--------------|--------------|----------------------------|
 | info         | Object       |              | 上传 ？是 ：否 | 七牛配置信息                 |
 | isUpload     | Boolean      | false        | 上传 ？是 ：否 | 是否开启上传                 |
-| list         | Array        | []           | 是           | 纯展示情况下需传入            |
+| list         | Array        | []           | 否           | 纯展示情况下需传入            |
 | space        | Number       | 12           | 否           | 图片间距，单位rpx             |
 
 
