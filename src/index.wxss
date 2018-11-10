@@ -1,0 +1,62 @@
+/* compinents/ImgGrid/ImgGrid.wxss */
+.img-grid {
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+}
+.img-grid_cell {
+  position: relative;
+  width: 33.3333%;
+  padding-top: 33.3333%;
+  overflow: hidden;
+}
+.img-grid_cell_box {
+  position: absolute;
+  background-color: #fff;
+}
+.img-grid_cell.img-grid_single_wh {
+  flex: 0 0 66.7%;
+  padding-top: 38%;
+}
+.img-grid_cell.img-grid_single_ww {
+  flex: 0 0 66.7%;
+  padding-top: 66.7%;
+}
+.img-grid_cell.img-grid_single_hw {
+  flex: 0 0 40%;
+  padding-top: 66.7%;
+}
+.img-grid_cell.img-grid_dual {
+  flex: 0 0 33.4%;
+  padding-top: 33.4%;
+}
+.img-grid image {
+  width: 100%;
+  height: 100%;
+}
+/* 上传 */
+.img-grid_upload {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.img-grid_upload_hover {
+  opacity: .7;
+}
+.img-grid_upload::before,
+.img-grid_upload::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  content: '';
+  display: block;
+  background-color: #b9b9b9;
+  transform: translate(-50%, -50%);
+  border-radius: 2rpx;
+}
+.img-grid_upload::before {
+  width: 44rpx;
+  height: 2rpx;
+}
+.img-grid_upload::after {
+  height: 44rpx;
+  width: 2rpx;
+}

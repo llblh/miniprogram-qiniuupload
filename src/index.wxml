@@ -1,0 +1,12 @@
+<view class="img-grid">
+  <block wx:for="{{ imageArray }}" wx:key="index">
+    <view class="img-grid_cell {{isDual && 'img-grid_dual'}}  {{isSingle && proportionClass[proportion]}}" >
+      <view class='img-grid_cell_box' style="top: {{ space }}rpx; right: {{ space }}rpx; bottom: {{ space }}rpx; left: {{ space }}rpx;" data-index="{{ index }}" data-item="{{ item }}" bindtap="actionClick">
+        <image mode="aspectFill" src="{{ item }}" bindload="imageLoad"/>
+      </view>
+    </view>
+  </block>
+  <view class="img-grid_cell" wx:if="{{ uploadBtn }}">
+    <view class='img-grid_cell_box img-grid_upload' style="top: {{ space }}rpx; right: {{ space }}rpx; bottom: {{ space }}rpx; left: {{ space }}rpx;" hover-class="img-grid_upload_hover" bindtap="selectImage"></view>
+  </view>
+</view>

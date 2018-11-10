@@ -1,0 +1,10 @@
+<view class="home">
+  <upload
+    info="{{ uploadInfo }}"
+    isUpload="{{ true }}"
+    bindsuccess="onUpImgSuccess"
+    binddelete="onDeleteImgSuccess"
+    binderror="onUpImgError"
+  />
+  <imggrid list="{{ list }}" />
+</view>

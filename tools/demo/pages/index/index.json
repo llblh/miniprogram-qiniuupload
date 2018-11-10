@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "upload": "../../components/index",
+    "imggrid": "../../components/index"
+  }
+}
