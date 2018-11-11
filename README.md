@@ -2,8 +2,7 @@
 
 小程序自定义组件 - 七牛上传组件
 
-> 使用此组件需要依赖小程序基础库 2.2.1 以上版本，同时依赖开发者工具的 npm 构建。具体详情可查阅[官方 npm 文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)。
-
+> 使用此组件需要依赖小程序基础库 2.3.2 以上版本，同时依赖开发者工具的 npm 构建。具体详情可查阅[官方 npm 文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)。
 > 项目参考[@oubingbing](https://github.com/oubingbing/qiniu-upload)七牛传图插件并结合自身项目改为了自定义第三方组件
 
 ## 使用方法
@@ -12,12 +11,13 @@
 ```
 npm install --save @carpenter/miniprogram-qiniuupload
 ```
+
 2. 在需要使用 miniprogram-qiniuupload 的页面 page.json 中添加 miniprogram-qiniuupload 自定义组件配置
 ``` json
 {
   "usingComponents": {
     "upload": "@carpenter/miniprogram-qiniuupload",
-    "imggrid": "@carpenter/miniprogram-qiniuupload"
+    // "imggrid": "@carpenter/miniprogram-qiniuupload"
   }
 }
 ```
@@ -55,8 +55,8 @@ npm install --save @carpenter/miniprogram-qiniuupload
 | tokenFunc    | Function     |              | 处理wx.request返回数据 return token
 | domain       | String       |              | 在七牛配置CDN域名，七牛测试域名有限制，所以需要您在七牛后台配置一个备案域名 |
 
-``` js
 
+``` js
 Page({
   /**
    * 页面的初始数据
@@ -98,7 +98,6 @@ Page({
     console.error(`错误：${event.detail}`)
   }
 })
-
 ```
 
 ### 绑定域名
@@ -110,5 +109,4 @@ ECN : https://up.qbox.me
 NCN : https://up-z1.qbox.me
 SCN : https://up-z2.qbox.me
 NA  : https://up-na0.qbox.me
-
 ```

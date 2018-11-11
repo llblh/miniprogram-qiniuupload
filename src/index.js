@@ -41,11 +41,6 @@ Component({
     ],
   },
   /**
-   * 组件生命周期声明对象
-   */
-  lifetimes: {
-  },
-  /**
    * 组件的方法列表
    */
   methods: {
@@ -142,11 +137,10 @@ Component({
       const position = filePaths.length - 1
       filePaths.forEach((item, index) => {
         upload(configs, item, res => {
-          console.log(res)
+          console.log('upload results：', res)
           if (position === index) {
             wx.hideLoading()
           }
-          console.log('上传结果:' + res.error)
           if (res.error === undefined) {
             const imageArray = this.data.imageArray
             if (editIndex === -1) {

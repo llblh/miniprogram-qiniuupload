@@ -33,7 +33,7 @@ class QiniuUpload {
           if (code) {
             uploadURL = code
           } else {
-            console.error('请设置上传区域 [ECN, SCN, NCN, NA]或者url')
+            console.error('请设置上传区域或者上传地址')
           }
           break
       }
@@ -85,7 +85,7 @@ class QiniuUpload {
   getQiniuToken(callback) {
     const {config} = this
     if (!config.uploadTokenURL) {
-      console.error('获取uploadTokenURL不能为空')
+      console.error('tokenURL不能为空')
       return
     }
     wx.request({
