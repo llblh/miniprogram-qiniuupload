@@ -5,6 +5,8 @@
 > 使用此组件需要依赖小程序基础库 2.3.2 以上版本，同时依赖开发者工具的 npm 构建。具体详情可查阅[官方 npm 文档](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)。
 > 项目参考[@oubingbing](https://github.com/oubingbing/qiniu-upload)七牛传图插件并结合自身项目改为了自定义第三方组件
 
+![miniprogram-qiniuupload](http://stor.llblh.com/miniprogram-qiniuupload.png)
+
 ## 使用方法
 
 1. 安装 miniprogram-qiniuupload
