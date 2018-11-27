@@ -4,6 +4,7 @@ class QiniuUpload {
       region: '',
       imageURLPrefix: '',
       uploadToken: '',
+      uploadKey: '',
       uploadTokenURL: '',
       uploadTokenFunction: null,
       fileName: false
@@ -50,6 +51,7 @@ class QiniuUpload {
       region: '',
       imageURLPrefix: '',
       uploadToken: '',
+      uploadKey: '',
       uploadTokenURL: '',
       uploadTokenFunction: null,
       fileName: false
@@ -72,6 +74,9 @@ class QiniuUpload {
       this.config.uploadTokenURL = options.uptokenURL
       this.config.uploadTokenFunction = options.uptokenFunc
     }
+    if (options.uploadKey) {
+      this.config.uploadKey = options.key
+    }
     if (options.domain) {
       this.config.imageURLPrefix = options.domain
     }
@@ -91,7 +96,10 @@ class QiniuUpload {
     wx.request({
       url: config.uploadTokenURL,
       success: (res) => {
-        this.config.uploadToken = config.uploadTokenFunction(res.data)
+        const {token, key, domain} = config.uploadTokenFunction(res.data)
+        this.config.uploadToken = token
+        this.config.uploadKey = key || ''
+        this.config.imageURLPrefix = domain || ''
         if (callback) {
           callback()
         }
@@ -104,10 +112,10 @@ class QiniuUpload {
    * @param {String} filePath
    * @param {Function} success
    * @param {Function} fail
-   * @param {Object} options
    * @memberof qiniuUpload
    */
-  doUpload(filePath, success, fail, options) {
+  doUpload(filePath, success, fail) {
+    console.log(filePath)
     const {config} = this
 
     if (config.uploadToken === null && config.uploadToken.length > 0) {
@@ -115,17 +123,18 @@ class QiniuUpload {
       return
     }
     const url = this.uploadURLFromRegionCode(config.region)
-    let fileName = filePath.split('//')[1]
-    if (options && options.key) {
-      fileName = options.key
+    const filePathData = filePath.split('.')
+    let fileName = filePathData[1] + filePathData[2]
+    if (config && config.uploadKey) {
+      fileName = config.uploadKey
     }
     const formData = {
       token: config.uploadToken
     }
-    if (!config.qiniuShouldUseQiniuFileName) {
+    if (!config.fileName) {
       formData.key = fileName
     }
-
+    console.info('uploadFile formData:', formData)
     wx.uploadFile({
       url,
       filePath,

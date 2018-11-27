@@ -157,7 +157,7 @@ Component({
             this.triggerEvent('error', res)
             console.error('上传失败:' + JSON.stringify(res))
           }
-        })
+        }, (err) => this.triggerEvent('error', err))
       })
     },
     // 图片点击事件

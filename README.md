@@ -53,10 +53,25 @@ npm install --save @carpenter/miniprogram-qiniuupload
 | uploadNumber | int          | 9            | 一次性选择图片的最大限制 |
 | region       | String       | ECN          | ECN, SCN, NCN, NA，您的七牛存储区域，或者区域地址 |
 | token        | String       |              | 七牛上传认证token，需要您再后台服务器请求七牛服务器活动，并且维护token的有效期 |
-| tokenURL     | String       |              | 获取token的api地址
-| tokenFunc    | Function     |              | 处理wx.request返回数据 return token
+| tokenURL     | String       |              | 获取token的api地址 |
+| tokenFunc    | Function     |              | 处理wx.request返回数据 return token |
+| fileKey      | String       |              | key值 |
 | domain       | String       |              | 在七牛配置CDN域名，七牛测试域名有限制，所以需要您在七牛后台配置一个备案域名 |
+| fileName     | Boolean      | false        | 是否使用七牛文件名 |
 
+```
+# 设置 {token} 时 {tokenURL}与{tokenFunc} 不设置
+# 设置 {tokenURL}与{tokenFunc} 时 {token} 不设置
+    {tokenFunc} 方法返回格式为 {token: 'xxx', key: 'xx', domain: 'http://xx.xx'}
+      token 同info.token
+      key 同 info.fileKey
+      domain 同 info.domain
+
+# 设置 {fileName} 为 false 时
+    - 设置 {fileKey} 时文件名为 {fileKey}
+    - 未设置 {fileKey} 时文件名以小程序图片临时地址获取
+# 设置 {fileName} 为 true 时文件名以七牛生成为准
+```
 
 ``` js
 Page({
@@ -69,10 +84,11 @@ Page({
       uploadNumber: 9, // 可以上传图片的数量限制,默认是九张
       region: 'ECN', // ECN, SCN, NCN, NA，您的七牛存储区域
       token: '', // 七牛上传token凭证
+      // fileKey: 'xxx',
       // tokenUrl: 'https://xxx.xxx.xxx',
-      // tokenFunc: res => res.data.token,
+      // tokenFunc: res => {token: res.data.token, key: res.data.key, domain: data.domain},
       domain: 'https://xxx.xxx.xxx', // 您配置的七牛CDN域名
-      shouldUseQiniuFileName: true,
+      fileName: false,
     },
     list: [
       'https://xxx.xxx.xxx',

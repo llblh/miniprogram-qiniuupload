@@ -9,7 +9,7 @@ Page({
       region: 'ECN', // ECN, SCN, NCN, NA，您的七牛存储区域
       token: '', // 七牛上传token凭证
       tokenUrl: '',
-      tokenFunc: res => res.data.token,
+      tokenFunc: res => ({token: res.data.uptoken}),
       domain: 'http://xxx.xxx.xxx', // 您配置的七牛CDN域名
       shouldUseQiniuFileName: true,
     },
