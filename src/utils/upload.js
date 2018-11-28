@@ -7,8 +7,8 @@ const initQiniu = (data) => {
     uploadKey: data.fileKey,
     uptokenURL: data.tokenUrl || null,
     uptokenFunc: data.tokenFunc || null,
-    domain: data.domain,
-    fileName: data.fileName,
+    domain: data.domain || '',
+    fileName: data.fileName || false,
   }
   qiniuUploader.init(options)
 }

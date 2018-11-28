@@ -75,7 +75,7 @@ class QiniuUpload {
       this.config.uploadTokenFunction = options.uptokenFunc
     }
     if (options.uploadKey) {
-      this.config.uploadKey = options.key
+      this.config.uploadKey = options.uploadKey
     }
     if (options.domain) {
       this.config.imageURLPrefix = options.domain
@@ -98,8 +98,12 @@ class QiniuUpload {
       success: (res) => {
         const {token, key, domain} = config.uploadTokenFunction(res.data)
         this.config.uploadToken = token
-        this.config.uploadKey = key || ''
-        this.config.imageURLPrefix = domain || ''
+        if (key) {
+          this.config.uploadKey = key
+        }
+        if (domain) {
+          this.config.imageURLPrefix = domain
+        }
         if (callback) {
           callback()
         }

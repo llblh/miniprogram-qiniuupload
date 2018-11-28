@@ -11,7 +11,7 @@ Page({
       tokenUrl: '',
       tokenFunc: res => ({token: res.data.uptoken}),
       domain: 'http://xxx.xxx.xxx', // 您配置的七牛CDN域名
-      shouldUseQiniuFileName: true,
+      fileName: false,
     },
     list: []
   },
