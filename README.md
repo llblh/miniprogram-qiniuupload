@@ -28,6 +28,7 @@ npm install --save @carpenter/miniprogram-qiniuupload
 ``` xml
   <!-- 目前暂不支持自定义样式 -->
   <upload
+    id="upload"
     info="{{ uploadInfo }}"
     isUpload="{{ true }}"
     bindsuccess="onUpImgSuccess"
@@ -114,6 +115,12 @@ Page({
    */
   onUpImgError(event) {
     console.error(`错误：${event.detail}`)
+  }
+  /**
+   * 清除
+   */
+  clearUpload() {
+    this.selectComponent('#upload').clearImageArray()
   }
 })
 ```

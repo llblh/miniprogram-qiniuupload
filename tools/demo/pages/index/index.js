@@ -34,5 +34,12 @@ Page({
    */
   onUpImgError(event) {
     console.error(`错误：${event.detail}`)
+  },
+
+  /**
+   * 清除图片
+   */
+  onClearUpload() {
+    this.selectComponent('#upload').clearImageArray()
   }
 })

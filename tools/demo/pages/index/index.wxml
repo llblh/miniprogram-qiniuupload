@@ -1,5 +1,6 @@
 <view class="home">
   <upload
+    id="upload"
     info="{{ uploadInfo }}"
     isUpload="{{ true }}"
     bindsuccess="onUpImgSuccess"
@@ -7,4 +8,5 @@
     binderror="onUpImgError"
   />
   <imggrid list="{{ list }}" />
+  <button bindtap="onClearUpload"> 清除 </button>
 </view>

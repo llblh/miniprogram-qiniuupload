@@ -224,5 +224,12 @@ Component({
       })
       this.triggerEvent('delete', newArray)
     },
+    // 清除
+    clearImageArray() {
+      this.setData({
+        imageArray: [],
+        uploadBtn: true,
+      })
+    }
   },
 })
