@@ -9,16 +9,17 @@ const initQiniu = (data) => {
     uptokenFunc: data.tokenFunc || null,
     domain: data.domain || '',
     fileName: data.fileName || false,
+    imgSecCheck: data.imgSecCheck || false,
   }
   qiniuUploader.init(options)
 }
 
 const uploadImage = (
-  configs, image, successcallback, failcallback
+  that, configs, image, successcallback, failcallback
 ) => {
   initQiniu(configs)
   const filePath = image
-  qiniuUploader.upload(filePath, successcallback, failcallback)
+  qiniuUploader.upload(that, filePath, successcallback, failcallback)
 }
 
 export default uploadImage

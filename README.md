@@ -36,6 +36,7 @@ npm install --save @carpenter/miniprogram-qiniuupload
     binderror="onUpImgError"
   />
   <!-- <imggrid list="{{ list }}" /> -->
+  <!-- <canvas canvas-id="compressCanvas" style="width: 300px; height:300px;"></canvas> -->
 ```
 #### miniprogram-qiniuupload 参数
 
@@ -59,6 +60,8 @@ npm install --save @carpenter/miniprogram-qiniuupload
 | fileKey      | String       |              | key值 |
 | domain       | String       |              | 在七牛配置CDN域名，七牛测试域名有限制，所以需要您在七牛后台配置一个备案域名 |
 | fileName     | Boolean      | false        | 是否使用七牛文件名 |
+| imgSecCheck  | Boolean      | false        | 是否对图片鉴黄 |
+
 
 ```
 # 设置 {token} 时 {tokenURL}与{tokenFunc} 不设置
@@ -73,6 +76,15 @@ npm install --save @carpenter/miniprogram-qiniuupload
     - 未设置 {fileKey} 时文件名以小程序图片临时地址获取
 # 设置 {fileName} 为 true 时文件名以七牛生成为准
 ```
+
+```
+# 设置 {imgSecCheck} 为 true 时
+    page页需添加
+    <canvas canvas-id="compressCanvas" style="width: 300px; height:300px;position: fixed;top: 0;left: 3000px;"></canvas>
+    鉴黄使用的是微信小程序鉴黄
+    通过wx.uploadFile()接口将图片发送给 七牛上传token接口，如果鉴定通过则返回token，不通过不返回token
+```
+
 
 ``` js
 Page({

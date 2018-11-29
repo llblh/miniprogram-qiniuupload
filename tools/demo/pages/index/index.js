@@ -12,6 +12,7 @@ Page({
       tokenFunc: res => ({token: res.data.uptoken}),
       domain: 'http://xxx.xxx.xxx', // 您配置的七牛CDN域名
       fileName: false,
+      imgSecCheck: false,
     },
     list: []
   },
@@ -33,7 +34,7 @@ Page({
    * 上传图片出错的回调
    */
   onUpImgError(event) {
-    console.error(`错误：${event.detail}`)
+    console.error('错误：', event.detail)
   },
 
   /**

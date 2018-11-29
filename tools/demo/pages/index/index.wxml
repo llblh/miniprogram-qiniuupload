@@ -10,3 +10,4 @@
   <imggrid list="{{ list }}" />
   <button bindtap="onClearUpload"> 清除 </button>
 </view>
+<canvas canvas-id="compressCanvas" style="width: 300px; height:300px;position: fixed;top: 0;left: 3000px;"></canvas>

@@ -39,6 +39,9 @@ Component({
       'img-grid_single_hw',
       ''
     ],
+    canvasWidth: 200,
+    canvasHeight: 300,
+    uploadError: [],
   },
   /**
    * 组件的方法列表
@@ -126,21 +129,19 @@ Component({
             console.log('隐藏上传按钮')
             this.setData({uploadBtn: false})
           }
-          this.runUploadFun(configs, tempFilePaths)
+          wx.showLoading({
+            title: '上传中...',
+          })
+          this.uploadBatch(0, configs, tempFilePaths)
         }
       })
     },
-    runUploadFun(configs, filePaths, editIndex = -1) {
-      wx.showLoading({
-        title: '上传中...',
-      })
+    uploadBatch(index, configs, filePaths, editIndex = -1) {
       const position = filePaths.length - 1
-      filePaths.forEach((item, index) => {
-        upload(configs, item, res => {
+      const item = filePaths[index]
+      if (item) {
+        upload(this, configs, item, res => {
           console.log('upload results：', res)
-          if (position === index) {
-            wx.hideLoading()
-          }
           if (res.error === undefined) {
             const imageArray = this.data.imageArray
             if (editIndex === -1) {
@@ -154,11 +155,32 @@ Component({
             this.triggerEvent('success', imageArray)
           } else {
             // 上传失败
-            this.triggerEvent('error', res)
-            console.error('上传失败:' + JSON.stringify(res))
+            this.data.uploadError.push(res)
+            console.error('上传失败:', res)
           }
-        }, (err) => this.triggerEvent('error', err))
-      })
+          if (position === index) {
+            wx.hideLoading()
+            if (this.data.uploadError.length) {
+              this.triggerEvent('error', this.data.uploadError)
+            }
+          } else {
+            this.uploadBatch(index + 1, configs, filePaths)
+          }
+        }, (err) => {
+          console.error('上传失败:', err)
+          this.data.uploadError.push(err)
+          if (position === index) {
+            wx.hideLoading()
+            if (this.data.uploadError.length) {
+              this.triggerEvent('error', this.data.uploadError)
+            }
+          } else {
+            this.uploadBatch(index + 1, configs, filePaths)
+          }
+        })
+      } else {
+        wx.hideLoading()
+      }
     },
     // 图片点击事件
     actionClick(e) {
@@ -206,7 +228,7 @@ Component({
         success: (res) => {
           const {tempFilePaths} = res
           const configs = this.configQiniu()
-          this.runUploadFun(configs, tempFilePaths, index)
+          this.uploadBatch(0, configs, tempFilePaths, index)
         }
       })
     },
@@ -229,6 +251,7 @@ Component({
       this.setData({
         imageArray: [],
         uploadBtn: true,
+        uploadError: [],
       })
     }
   },
