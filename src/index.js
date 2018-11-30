@@ -124,11 +124,6 @@ Component({
         sourceType: ['album', 'camera'],
         success: (res) => {
           const {tempFilePaths} = res
-          console.log(`数量：${imageLength + tempFilePaths.length}, 限制：${limitNumber}`)
-          if ((imageLength + tempFilePaths.length) >= limitNumber) {
-            console.log('隐藏上传按钮')
-            this.setData({uploadBtn: false})
-          }
           wx.showLoading({
             title: '上传中...',
           })
@@ -162,7 +157,9 @@ Component({
             wx.hideLoading()
             if (this.data.uploadError.length) {
               this.triggerEvent('error', this.data.uploadError)
+              this.data.uploadError = []
             }
+            this.checkUploadBtnShow()
           } else {
             this.uploadBatch(index + 1, configs, filePaths)
           }
@@ -173,7 +170,9 @@ Component({
             wx.hideLoading()
             if (this.data.uploadError.length) {
               this.triggerEvent('error', this.data.uploadError)
+              this.data.uploadError = []
             }
+            this.checkUploadBtnShow()
           } else {
             this.uploadBatch(index + 1, configs, filePaths)
           }
@@ -181,6 +180,13 @@ Component({
       } else {
         wx.hideLoading()
       }
+    },
+    // 判断是否显示上传按钮
+    checkUploadBtnShow() {
+      const {imageArray, qiniuInfo} = this.data
+      const imageLength = imageArray.length
+      const uploadBtn = imageLength < qiniuInfo.uploadNumber
+      this.setData({uploadBtn})
     },
     // 图片点击事件
     actionClick(e) {
